@@ -27,6 +27,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case routes.AboutPage:
       return MaterialPageRoute(builder: (context) => AboutPage());
 
+    // TODO ADD argments
     // case routes.HomePage:
     //   var userName = settings.arguments as String;
     //   return MaterialPageRoute(
