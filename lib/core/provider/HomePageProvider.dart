@@ -22,10 +22,12 @@ class HomePageProvider extends BaseProvider {
   // }
 
   // Navigate to Pages
-  Future navigateTo(String pageName) {
+  Future navigateTo(String pageName) async {
     setState(ProviderState.Busy);
-    _navigationService.navigateTo(pageName);
+
+    await _navigationService.navigateTo(pageName);
     setErrorMessage(null);
+
     setState(ProviderState.Idel);
   }
 }

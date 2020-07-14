@@ -1,3 +1,4 @@
+import 'package:broken_plural_ar/core/enum/ProviderState.dart';
 import 'package:broken_plural_ar/core/provider/HomePageProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,24 +15,32 @@ class HomePage extends StatelessWidget {
       body: ChangeNotifierProvider<HomePageProvider>(
         create: (context) => HomePageProvider(),
         builder: (context, child) => Consumer<HomePageProvider>(
-          builder: (context, value, child) => Container(
-            child: Column(
-              children: [
-                navigateButton('Learn Page', () {
-                  value.navigateTo(routes.LearnPage);
-                }),
-                navigateButton('Search Page', () {
-                  value.navigateTo(routes.SearchPage);
-                }),
-                navigateButton('Test Page', () {
-                  value.navigateTo(routes.TestPage);
-                }),
-                navigateButton('About Page', () {
-                  value.navigateTo(routes.AboutPage);
-                }),
-              ],
-            ),
-          ),
+          builder: (context, value, child) {
+            if (value.getState == ProviderState.Busy) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            return Container(
+              child: Column(
+                children: [
+                  navigateButton('Learn Page', () {
+                    value.navigateTo(routes.LearnPage);
+                  }),
+                  navigateButton('Search Page', () {
+                    value.navigateTo(routes.SearchPage);
+                  }),
+                  navigateButton('Test Page', () {
+                    value.navigateTo(routes.TestPage);
+                  }),
+                  navigateButton('About Page', () {
+                    value.navigateTo(routes.AboutPage);
+                  }),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );
