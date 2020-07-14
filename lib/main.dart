@@ -1,7 +1,13 @@
-import 'package:broken_plural_ar/ui/pages/SearchPage.dart';
 import 'package:flutter/material.dart';
 
+import 'package:broken_plural_ar/core/services/routing/navigation_service.dart';
+import 'package:broken_plural_ar/core/data/RouteName.dart' as routes;
+import 'package:broken_plural_ar/route.dart' as router;
+import 'package:broken_plural_ar/locator.dart';
+import 'package:broken_plural_ar/ui/pages/HomePage.dart';
+
 void main() {
+  setupLocator();
   runApp(MyApp());
 }
 
@@ -10,24 +16,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter App ',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SearchPage(),
+      navigatorKey: locator<NavigationService>().navigatorKey,
+      onGenerateRoute: router.generateRoute,
+      initialRoute: routes.HomePage,
+      home: HomePage(),
     );
   }
 }
