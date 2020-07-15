@@ -1,5 +1,5 @@
-class WordModels {
-  WordModels.fromDict(Map data) {
+class WordModel {
+  WordModel.fromDict(Map data) {
     vocalized = data['vocalized'];
     unvocalized = data['unvocalized'];
     wordtype = data['wordtype'];
@@ -9,14 +9,14 @@ class WordModels {
     gender = data['gender'];
     feminin = data['feminin'];
     masculin = data['masculin'];
-    broken_plural = data['broken_plural'];
+    brokenPlural = data['brokenPlural'];
 
     feminable = data['feminable'];
-    masculin_plural = data['masculin_plural'];
-    feminin_plural = data['feminin_plural'];
-    mamnou3_sarf = data['mamnou3_sarf'];
+    masculinPlural = data['masculinPlural'];
+    femininPlural = data['femininPlural'];
+    mamnou3Sarf = data['mamnou3Sarf'];
     relative = data['relative'];
-    plural_tanwin_nasb = data['plural_tanwin_nasb'];
+    pluralTanwinNasb = data['pluralTanwinNasb'];
   }
 
   String vocalized;
@@ -28,15 +28,15 @@ class WordModels {
   String gender;
   String feminin;
   String masculin;
-  String broken_plural;
+  String brokenPlural;
 
   int feminable;
-  int masculin_plural;
-  int feminin_plural;
-  int mamnou3_sarf;
+  int masculinPlural;
+  int femininPlural;
+  int mamnou3Sarf;
   int relative;
 
-  String plural_tanwin_nasb;
+  String pluralTanwinNasb;
 
   Map toDict() {
     Map data = {};
@@ -50,13 +50,13 @@ class WordModels {
     data['gender'] = gender;
     data['feminin'] = feminin;
     data['masculin'] = masculin;
-    data['broken_plural'] = broken_plural;
+    data['brokenPlural'] = brokenPlural;
     data['feminable'] = feminable;
-    data['masculin_plural'] = masculin_plural;
-    data['feminin_plural'] = feminin_plural;
-    data['mamnou3_sarf'] = mamnou3_sarf;
+    data['masculinPlural'] = masculinPlural;
+    data['femininPlural'] = femininPlural;
+    data['mamnou3Sarf'] = mamnou3Sarf;
     data['relative'] = relative;
-    data['plural_tanwin_nasb'] = plural_tanwin_nasb;
+    data['pluralTanwinNasb'] = pluralTanwinNasb;
 
     return data;
   }

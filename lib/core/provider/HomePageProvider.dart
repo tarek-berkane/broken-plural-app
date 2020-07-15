@@ -7,21 +7,6 @@ import 'package:broken_plural_ar/locator.dart';
 class HomePageProvider extends BaseProvider {
   final NavigationService _navigationService = locator<NavigationService>();
 
-  // Future login({bool success = true}) async {
-  //   setState(ProviderState.Busy);
-  //   await Future.delayed(Duration(seconds: 1));
-
-  //   if (!success) {
-  //     setErrorMessage('Error has occured with the login');
-  //   } else {
-  //     _navigationService.navigateTo(routes.HomePage);
-  //     setErrorMessage(null);
-  //   }
-
-  //   setState(ProviderState.Idel);
-  // }
-
-  // Navigate to Pages
   Future navigateTo(String pageName) async {
     setState(ProviderState.Busy);
 

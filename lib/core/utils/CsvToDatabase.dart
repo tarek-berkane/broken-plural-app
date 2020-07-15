@@ -10,14 +10,20 @@ class CsvToDatabase {
 
   CsvToDatabase({@required this.csvData}) {
     assert(this.csvData != null);
-    initDataBase();
   }
 
-  void initDataBase() {
+  Future _initDataBase() async {
     if (AppData.appState == AppState.Production) {
       _db = RealDatabase.db;
     } else {
       _db = FakeDatabase.db;
     }
+    await _db.initDB();
+  }
+
+  void pushToDatabase(List<List<String>> data) async {
+    await _initDataBase();
+    // TODO convert csv data to List of WordModel
+    // _db.newWords()
   }
 }

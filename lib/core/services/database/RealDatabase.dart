@@ -30,13 +30,13 @@ class RealDatabase extends BaseDatabase {
   }
 
   @override
-  Future<List<WordModels>> getAllClients({int limit = 25}) {
+  Future<List<WordModel>> getAllClients({int limit = 25}) {
     // TODO: implement getAllClients
     throw UnimplementedError();
   }
 
   @override
-  newWord(WordModels newWord) {
+  newWords(WordModel newWord) {
     // TODO: implement newClient
     throw UnimplementedError();
   }

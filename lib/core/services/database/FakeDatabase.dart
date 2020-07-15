@@ -3,14 +3,14 @@ import 'package:broken_plural_ar/core/models/WordModel.dart';
 
 import 'package:sqflite_common/sqlite_api.dart';
 
-/** just for [Testing] */
+/// just for [Testing]
 
 class FakeDatabase extends BaseDatabase {
   FakeDatabase._();
 
   static final db = FakeDatabase._();
 
-  Map fakeDatabaseStorage = null;
+  Map fakeDatabaseStorage;
 
   @override
   // TODO: implement database
@@ -33,16 +33,16 @@ class FakeDatabase extends BaseDatabase {
   }
 
   @override
-  Future<List<WordModels>> getAllClients({int start = 0, int limit = 25}) {
-    List<WordModels> wordModelsList = [];
+  Future<List<WordModel>> getAllClients({int start = 0, int limit = 25}) {
+    List<WordModel> wordModelsList = [];
     for (var i = start; i < limit; i++) {
-      wordModelsList.add(WordModels.fromDict(fakeDatabaseStorage[i]));
+      wordModelsList.add(WordModel.fromDict(fakeDatabaseStorage[i]));
     }
     throw UnimplementedError();
   }
 
   @override
-  newWord(WordModels newWord) {
+  newWords(WordModel newWord) {
     // TODO: implement newClient
     throw UnimplementedError();
   }

@@ -7,6 +7,7 @@ class BaseProvider extends ChangeNotifier {
   String _errorMessage;
 
   get getState => _state;
+  get errorMessage => _errorMessage;
 
   void setState(ProviderState providerState) {
     _state = providerState;

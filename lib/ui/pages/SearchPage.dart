@@ -1,13 +1,11 @@
-import 'package:broken_plural_ar/core/common/loggin.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:broken_plural_ar/core/provider/SearchPageProvider.dart';
 import 'package:flutter/material.dart';
-import 'package:broken_plural_ar/core/utils/CsvLoadManager.dart';
+
+import 'package:provider/provider.dart';
 
 class SearchPage extends StatelessWidget {
-  CsvLoadManager _csvLoadManager = CsvLoadManager();
-
   onbuttonPressed() {
-    _csvLoadManager.loadCSV();
+    // _csvLoadManager.loadCSV();
   }
 
   @override
@@ -16,14 +14,22 @@ class SearchPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Search Word'),
       ),
-      body: Center(
-        child: Center(
-          child: RaisedButton(
-            child: Text("Test"),
-            onPressed: onbuttonPressed,
-          ),
+      body: ChangeNotifierProvider<SearchPageProvider>(
+        create: (context) => SearchPageProvider(),
+        builder: (context, child) => Consumer<SearchPageProvider>(
+          builder: (context, value, child) {
+            return Center(
+              child: Text("Done"),
+            );
+          },
         ),
       ),
+    );
+  }
+
+  Center loadingPage() {
+    return Center(
+      child: CircularProgressIndicator(),
     );
   }
 }
@@ -60,9 +66,8 @@ class _CounterState extends State<Counter> {
     // DateTime _time = DateTime.now();
     return Container(
       child: Text(
-        "${_time}",
+        "$_time",
       ),
-      // "${_time.minute.toString().padLeft(2, "0")}:${_time.second.toString().padLeft(2, "0")}"),
     );
   }
 }

@@ -8,13 +8,20 @@ class CsvLoadManager {
     return await rootBundle.loadString(path);
   }
 
-  void loadCSV() {
+  bool loadCSV() {
+    bool _loadingDone = false;
+
     loadAsset('assets/data/WordData.csv').then((dynamic output) {
       List<List<dynamic>> rowsAsListOfValues =
           const CsvToListConverter().convert(output, eol: '\n');
 
       csvList = rowsAsListOfValues;
+      _loadingDone = true;
+    }, onError: () {
+      _loadingDone = false;
     });
+
+    return _loadingDone;
   }
 
   void csvValidation() {
