@@ -1,3 +1,4 @@
+import 'package:broken_plural_ar/core/common/loggin.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/services.dart';
 
@@ -8,18 +9,21 @@ class CsvLoadManager {
     return await rootBundle.loadString(path);
   }
 
-  bool loadCSV() {
+  Future<bool> loadCSV() async {
     bool _loadingDone = false;
 
-    loadAsset('assets/data/WordData.csv').then((dynamic output) {
+    try {
+      var rawCSVdata = await loadAsset('assets/data/WordData.csv');
+
       List<List<dynamic>> rowsAsListOfValues =
-          const CsvToListConverter().convert(output, eol: '\n');
+          const CsvToListConverter().convert(rawCSVdata, eol: '\n');
 
       csvList = rowsAsListOfValues;
       _loadingDone = true;
-    }, onError: () {
+    } catch (e) {
+      consoleLog(e.toString(), typeLog: 'ERROR', scope: "loadCSV>onError");
       _loadingDone = false;
-    });
+    }
 
     return _loadingDone;
   }

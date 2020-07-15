@@ -16,5 +16,5 @@ abstract class BaseDatabase {
 
   Future<List<WordModel>> getAllClients({int limit = 25});
 
-  Future<bool> newWords(WordModel newWord);
+  Future<bool> newWords(List<List<dynamic>> listOfWords);
 }

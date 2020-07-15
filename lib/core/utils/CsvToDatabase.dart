@@ -21,9 +21,8 @@ class CsvToDatabase {
     await _db.initDB();
   }
 
-  void pushToDatabase(List<List<String>> data) async {
+  Future pushToDatabase(List<List<dynamic>> data) async {
     await _initDataBase();
-    // TODO convert csv data to List of WordModel
-    // _db.newWords()
+    _db.newWords(data);
   }
 }

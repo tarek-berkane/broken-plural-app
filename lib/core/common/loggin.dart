@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 
-void consoleLog(text, {appName, typeLog = 'DEBUG'}) {
+void consoleLog(text, {scope, typeLog = 'DEBUG'}) {
   assert(text != null);
 
-  var name = appName ?? 'Default';
+  var name = scope ?? 'Default';
 
   var time = DateTime.now();
 

@@ -36,7 +36,7 @@ class RealDatabase extends BaseDatabase {
   }
 
   @override
-  newWords(WordModel newWord) {
+  Future<bool> newWords(List<List<dynamic>> listOfWords) {
     // TODO: implement newClient
     throw UnimplementedError();
   }
