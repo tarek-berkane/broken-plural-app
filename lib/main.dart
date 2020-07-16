@@ -5,7 +5,6 @@ import 'package:broken_plural_ar/core/services/routing/navigation_service.dart';
 import 'package:broken_plural_ar/core/data/RouteName.dart' as routes;
 import 'package:broken_plural_ar/route.dart' as router;
 import 'package:broken_plural_ar/locator.dart';
-import 'package:broken_plural_ar/ui/pages/HomePage.dart';
 
 void main() {
   setupLocator();

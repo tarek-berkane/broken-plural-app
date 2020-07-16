@@ -10,7 +10,6 @@ class WordModel {
     feminin = data['feminin'];
     masculin = data['masculin'];
     brokenPlural = data['brokenPlural'];
-
     feminable = data['feminable'];
     masculinPlural = data['masculinPlural'];
     femininPlural = data['femininPlural'];

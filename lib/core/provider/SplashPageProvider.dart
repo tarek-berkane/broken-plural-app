@@ -1,4 +1,5 @@
 import 'package:broken_plural_ar/core/common/loggin.dart';
+
 import 'package:broken_plural_ar/core/enum/ProviderState.dart';
 import 'package:broken_plural_ar/core/provider/BaseProvider.dart';
 import 'package:broken_plural_ar/core/services/routing/navigation_service.dart';
@@ -35,6 +36,9 @@ class SpalshPageProvider extends BaseProvider {
   }
 
   Future loadData() async {
+    // TODO: need to find a way to overpass excption of calling setstate during builde
+    consoleLog('test 1 check', scope: "loadData", typeLog: 'debug');
+
     await Future.delayed(Duration(seconds: 1));
     dynamic _csvData = await _loadDataFromCsv();
     if (_csvData == null) {

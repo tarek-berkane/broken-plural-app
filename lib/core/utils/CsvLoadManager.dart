@@ -21,7 +21,7 @@ class CsvLoadManager {
       csvList = rowsAsListOfValues;
       _loadingDone = true;
     } catch (e) {
-      consoleLog(e.toString(), typeLog: 'ERROR', scope: "loadCSV>onError");
+      consoleLog(e.toString(), typeLog: 'ERROR', scope: "loadCSV > onError");
       _loadingDone = false;
     }
 

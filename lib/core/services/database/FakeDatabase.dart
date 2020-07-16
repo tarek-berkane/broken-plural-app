@@ -1,4 +1,3 @@
-import 'package:broken_plural_ar/core/common/loggin.dart';
 import 'package:broken_plural_ar/core/services/database/BaseDatabase.dart';
 import 'package:broken_plural_ar/core/models/WordModel.dart';
 
@@ -18,8 +17,9 @@ class FakeDatabase extends BaseDatabase {
   Future<Database> get database => throw UnimplementedError();
 
   @override
-  initDB() {
+  initDB() async {
     fakeDatabaseStorage = {};
+    return Future.value(true);
   }
 
   @override
@@ -46,5 +46,6 @@ class FakeDatabase extends BaseDatabase {
   Future<bool> newWords(List<List<dynamic>> listOfWords) {
     // TODO: implement newClient
     print("done");
+    return Future.value(true);
   }
 }
