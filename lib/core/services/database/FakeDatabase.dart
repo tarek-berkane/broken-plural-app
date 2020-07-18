@@ -1,3 +1,4 @@
+import 'package:broken_plural_ar/core/common/loggin.dart';
 import 'package:broken_plural_ar/core/services/database/BaseDatabase.dart';
 import 'package:broken_plural_ar/core/models/WordModel.dart';
 
@@ -10,7 +11,7 @@ class FakeDatabase extends BaseDatabase {
 
   static final db = FakeDatabase._();
 
-  Map fakeDatabaseStorage;
+  List<Map> fakeDatabaseStorage;
 
   @override
   // TODO: implement database
@@ -18,19 +19,30 @@ class FakeDatabase extends BaseDatabase {
 
   @override
   initDB() async {
-    fakeDatabaseStorage = {};
+    fakeDatabaseStorage = [];
     return Future.value(true);
   }
 
   @override
   getWordById(int id) {
-    return fakeDatabaseStorage[id];
+    // TODO Implement this function
+    return fakeDatabaseStorage[0][id];
   }
 
   @override
-  getWordByString(String word) {
-    // TODO: implement getClient
-    throw UnimplementedError();
+  Future<List<WordModel>> getWordByString(String word) {
+    List<WordModel> data = [];
+
+    consoleLog("${fakeDatabaseStorage.length}",
+        scope: "FakeDatabase > getWordByString");
+
+    for (var i = 0; i < fakeDatabaseStorage.length; i++) {
+      if (fakeDatabaseStorage[i]['vocalized'].contains(word) ||
+          fakeDatabaseStorage[i]['unvocalized'].contains(word)) {
+        data.add(WordModel.fromDict(fakeDatabaseStorage[i]));
+      }
+    }
+    return Future.value(data);
   }
 
   @override
@@ -39,13 +51,35 @@ class FakeDatabase extends BaseDatabase {
     for (var i = start; i < limit; i++) {
       wordModelsList.add(WordModel.fromDict(fakeDatabaseStorage[i]));
     }
-    throw UnimplementedError();
+    return Future.value(wordModelsList);
   }
 
   @override
   Future<bool> newWords(List<List<dynamic>> listOfWords) {
-    // TODO: implement newClient
-    print("done");
+    //  add data to fakeDatabaseStore just in Debug Mode in
+    //  production mode this data need to be stored in database
+
+    for (var i = 1; i < listOfWords.length; i++) {
+      fakeDatabaseStorage.add({
+        "id": listOfWords[i][0],
+        "vocalized": listOfWords[i][1],
+        "unvocalized": listOfWords[i][2],
+        "wordtype": listOfWords[i][3],
+        "root": listOfWords[i][4],
+        "wazn": listOfWords[i][5],
+        "category": listOfWords[i][6],
+        "gender": listOfWords[i][7],
+        "feminin": listOfWords[i][8],
+        "masculin": listOfWords[i][9],
+        "broken_plural": listOfWords[i][10],
+        "feminable": listOfWords[i][11],
+        "masculin_plural": listOfWords[i][12],
+        "feminin_plural": listOfWords[i][13],
+        "mamnou3_sarf": listOfWords[i][14],
+        "relative": listOfWords[i][15],
+        "plural_tanwin_nasb": listOfWords[i][16],
+      });
+    }
     return Future.value(true);
   }
 }

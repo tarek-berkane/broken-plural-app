@@ -10,9 +10,9 @@ abstract class BaseDatabase {
 
   Future initDB();
 
-  Future getWordById(int id);
+  Future<WordModel> getWordById(int id);
 
-  Future getWordByString(String word);
+  Future<List<WordModel>> getWordByString(String word);
 
   Future<List<WordModel>> getAllClients({int limit = 25});
 

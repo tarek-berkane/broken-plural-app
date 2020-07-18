@@ -54,6 +54,6 @@ void consoleLog(text, {scope, String typeLog = 'DEBUG'}) {
   }
 
   debugPrint(
-      "$color $_typeLog \x1b[37m: $text  || scope : $name ||\x1b[36m  ${time.hour}:" +
+      "$color $_typeLog \x1b[37m: $text  || scope :\x1b[33m $name \x1b[37m||\x1b[36m  ${time.hour}:" +
           "${time.minute.toString().padLeft(2, '0')}:${time.second.toString().padLeft(2, '0')}\x1b[37m");
 }

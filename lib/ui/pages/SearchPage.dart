@@ -1,3 +1,6 @@
+import 'package:broken_plural_ar/core/common/loggin.dart';
+import 'package:broken_plural_ar/core/enum/ProviderState.dart';
+import 'package:broken_plural_ar/core/models/WordModel.dart';
 import 'package:broken_plural_ar/core/provider/SearchPageProvider.dart';
 import 'package:flutter/material.dart';
 
@@ -16,26 +19,25 @@ class SearchPage extends StatelessWidget {
       ),
       body: ChangeNotifierProvider<SearchPageProvider>(
         create: (context) => SearchPageProvider(),
-        builder: (context, child) => Consumer<SearchPageProvider>(
-          builder: (context, value, child) {
-            return Container(
-              alignment: Alignment.center,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SearchArea(),
-                  Container(
-                    alignment: Alignment.center,
-                    child: RaisedButton(
-                      child: Text('Search'),
-                      onPressed: () {},
-                    ),
-                  )
-                ],
-              ),
-            );
-          },
-        ),
+        builder: (context, child) {
+          return Container(
+            alignment: Alignment.center,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SearchArea(),
+                ResultArea(),
+                // Container(
+                //   alignment: Alignment.center,
+                //   child: RaisedButton(
+                //     child: Text('Search'),
+                //     onPressed: () {},
+                //   ),
+                // )
+              ],
+            ),
+          );
+        },
       ),
     );
   }
@@ -48,8 +50,11 @@ class SearchPage extends StatelessWidget {
 }
 
 class SearchArea extends StatelessWidget {
+  TextEditingController _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final _provider = Provider.of<SearchPageProvider>(context);
+
     return Container(
       // width: 450,
       child: Column(
@@ -65,6 +70,7 @@ class SearchArea extends StatelessWidget {
                 height: 40,
                 width: 200,
                 child: TextField(
+                  controller: _controller,
                   decoration: InputDecoration(
                       contentPadding:
                           EdgeInsets.only(left: 8, right: 8, bottom: 10),
@@ -94,6 +100,18 @@ class SearchArea extends StatelessWidget {
               ),
             ],
           ),
+          Container(
+            alignment: Alignment.center,
+            child: RaisedButton(
+              child: Text('Search'),
+              onPressed: () {
+                String text = _controller.text;
+                if (text.isNotEmpty) {
+                  _provider.searchWord(text);
+                }
+              },
+            ),
+          ),
         ],
       ),
     );
@@ -122,6 +140,41 @@ class SearchArea extends StatelessWidget {
   // removeToast(BuildContext context) {
   //   Scaffold.of(context).removeCurrentSnackBar();
   // }
+}
+
+class ResultArea extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final List<WordModel> listWordModel =
+        context.watch<SearchPageProvider>().getResult;
+    final ProviderState _providerState =
+        context.watch<SearchPageProvider>().getState;
+
+    if (_providerState == ProviderState.Busy) {
+      return Container(
+        child: CircularProgressIndicator(),
+      );
+    }
+
+    if (_providerState == ProviderState.Idel) {
+      if (listWordModel.isEmpty) {
+        return Container(
+          child: Text("Empty"),
+        );
+      }
+
+      return Card(
+        child: Container(
+          height: 40,
+          child: Text("Result"),
+        ),
+      );
+    }
+
+    return Container(
+      child: Text("error"),
+    );
+  }
 }
 
 // class Counter extends StatefulWidget {

@@ -1,5 +1,6 @@
 import 'package:broken_plural_ar/ui/pages/AboutPage.dart';
 import 'package:broken_plural_ar/ui/pages/SearchPage.dart';
+import 'package:broken_plural_ar/ui/pages/SplashPage.dart';
 import 'package:flutter/material.dart';
 
 import 'package:broken_plural_ar/core/services/routing/navigation_service.dart';
@@ -24,8 +25,8 @@ class MyApp extends StatelessWidget {
       ),
       navigatorKey: locator<NavigationService>().navigatorKey,
       onGenerateRoute: router.generateRoute,
-      initialRoute: routes.SearchPage,
-      home: SearchPage(),
+      initialRoute: routes.SplashPage,
+      home: SplashPage(),
     );
   }
 }

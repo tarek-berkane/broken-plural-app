@@ -25,14 +25,10 @@ class SpalshPageProvider extends BaseProvider {
       await csvToDatabase.pushToDatabase(csvData);
       return true;
     } catch (e) {
-      consoleLog(e.toString(), typeLog: "Error", scope: "_saveDataToDataBase");
+      consoleLog(e.toString(),
+          typeLog: "Error", scope: "SpalshPageProvider > _saveDataToDataBase");
       return false;
     }
-  }
-
-  void _navigateTo(String pageName) {
-    final NavigationService _navigationService = locator<NavigationService>();
-    _navigationService.repalcePage(pageName);
   }
 
   Future loadData() async {
@@ -40,10 +36,11 @@ class SpalshPageProvider extends BaseProvider {
     consoleLog('test 1 check', scope: "loadData", typeLog: 'debug');
 
     await Future.delayed(Duration(seconds: 1));
+
     dynamic _csvData = await _loadDataFromCsv();
     if (_csvData == null) {
       setState(ProviderState.Error);
-      consoleLog('Data not loaded from csv file',
+      consoleLog('Data not loaded from csv file _csvData == null',
           typeLog: 'ERROR', scope: "loadData > _loadDataFromCsv");
       return;
     }
@@ -52,10 +49,15 @@ class SpalshPageProvider extends BaseProvider {
     if (!_isDataSaveToDB) {
       setState(ProviderState.Error);
       consoleLog('Data not loaded from csv file',
-          typeLog: 'ERROR', scope: "loadData > _saveDataToDataBase");
+          typeLog: 'ERROR', scope: "SpalshPageProvider >loadData ");
       return;
     }
 
     _navigateTo(route.HomePage);
+  }
+
+  void _navigateTo(String pageName) {
+    final NavigationService _navigationService = locator<NavigationService>();
+    _navigationService.repalcePage(pageName);
   }
 }

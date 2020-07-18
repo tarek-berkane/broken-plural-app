@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AboutPage extends StatelessWidget {
-  String email, name, age;
+  // String email, name, age;
 
   @override
   Widget build(BuildContext context) {
