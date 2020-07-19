@@ -160,13 +160,16 @@ class ResultArea extends StatelessWidget {
           child: Text("Empty"),
         );
       }
-
+      consoleLog(_provider.getResult[2].toDict().toString());
       int listLength = _provider.getResult.length;
       consoleLog('$listLength');
       return Expanded(
         child: ListView(
           children: [
-            for (int i = 0; i < listLength && i < 25; i++) WordCard(),
+            for (int i = 0; i < listLength && i < 10; i++)
+              WordCard(
+                wordModel: _provider.getResult[i],
+              ),
             Container(
               child: Text('heelo'),
             )

@@ -1,15 +1,19 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:broken_plural_ar/core/models/WordModel.dart';
 import 'package:flutter/material.dart';
 
 class WordCard extends StatelessWidget {
+  const WordCard({@required this.wordModel});
+  final WordModel wordModel;
+
   @override
   Widget build(BuildContext context) {
     return Card(
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          // TODO: navigate to about word page
+        },
         child: Container(
-          // width: 200,
-          // height: 150,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -19,16 +23,18 @@ class WordCard extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      textArea('hello', 'dddd'),
-                      textArea('hello', 'dddd'),
-                      textArea('hello', 'dddd'),
+                      textArea('vocalized', wordModel.vocalized),
+                      textArea('unvocalized', wordModel.unvocalized),
+                      textArea('wordtype', wordModel.wordtype),
+                      textArea('root', wordModel.root),
                     ],
                   ),
                   Column(
                     children: [
-                      textArea('helloببببببب', 'dddd'),
-                      textArea('hello', 'dddd'),
-                      textArea('hello', 'dddd'),
+                      textArea('wazn', wordModel.wazn),
+                      textArea('category', wordModel.category),
+                      textArea('gender', wordModel.gender),
+                      textArea('broken_plural', wordModel.brokenPlural),
                     ],
                   ),
                 ],
@@ -43,20 +49,25 @@ class WordCard extends StatelessWidget {
     );
   }
 
-  Container textArea(String title, String data) => Container(
-        child: Row(
-          children: [
-            Container(
-              width: 50,
-              height: 20,
-              child: AutoSizeText(title),
-            ),
-            Container(
-              width: 50,
-              height: 20,
-              child: AutoSizeText(title),
-            ),
-          ],
-        ),
-      );
+  Container textArea(String title, String data) {
+    if (data == null) {
+      data = ' ';
+    }
+    return Container(
+      child: Row(
+        children: [
+          Container(
+            width: 50,
+            height: 20,
+            child: AutoSizeText(title),
+          ),
+          Container(
+            width: 50,
+            height: 20,
+            child: AutoSizeText(data),
+          ),
+        ],
+      ),
+    );
+  }
 }
