@@ -2,6 +2,7 @@ import 'package:broken_plural_ar/core/common/loggin.dart';
 import 'package:broken_plural_ar/core/enum/ProviderState.dart';
 import 'package:broken_plural_ar/core/models/WordModel.dart';
 import 'package:broken_plural_ar/core/provider/SearchPageProvider.dart';
+import 'package:broken_plural_ar/ui/widgets/WordCard.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -145,28 +146,31 @@ class SearchArea extends StatelessWidget {
 class ResultArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final List<WordModel> listWordModel =
-        context.watch<SearchPageProvider>().getResult;
-    final ProviderState _providerState =
-        context.watch<SearchPageProvider>().getState;
+    final _provider = context.watch<SearchPageProvider>();
 
-    if (_providerState == ProviderState.Busy) {
+    if (_provider.getState == ProviderState.Busy) {
       return Container(
         child: CircularProgressIndicator(),
       );
     }
 
-    if (_providerState == ProviderState.Idel) {
-      if (listWordModel.isEmpty) {
+    if (_provider.getState == ProviderState.Idel) {
+      if (_provider.getResult.isEmpty) {
         return Container(
           child: Text("Empty"),
         );
       }
 
-      return Card(
-        child: Container(
-          height: 40,
-          child: Text("Result"),
+      int listLength = _provider.getResult.length;
+      consoleLog('$listLength');
+      return Expanded(
+        child: ListView(
+          children: [
+            for (int i = 0; i < listLength && i < 25; i++) WordCard(),
+            Container(
+              child: Text('heelo'),
+            )
+          ],
         ),
       );
     }

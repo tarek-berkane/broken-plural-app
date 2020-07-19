@@ -15,7 +15,6 @@ class SpalshPageProvider extends BaseProvider {
     if (await _csvLoadManager.loadCSV()) {
       return _csvLoadManager.csvList;
     }
-    setState(ProviderState.Error);
     return null;
   }
 
@@ -35,9 +34,8 @@ class SpalshPageProvider extends BaseProvider {
     // TODO: need to find a way to overpass excption of calling setstate during builde
     consoleLog('test 1 check', scope: "loadData", typeLog: 'debug');
 
-    await Future.delayed(Duration(seconds: 1));
-
     dynamic _csvData = await _loadDataFromCsv();
+
     if (_csvData == null) {
       setState(ProviderState.Error);
       consoleLog('Data not loaded from csv file _csvData == null',
@@ -48,7 +46,7 @@ class SpalshPageProvider extends BaseProvider {
     bool _isDataSaveToDB = await _saveDataToDataBase(_csvData);
     if (!_isDataSaveToDB) {
       setState(ProviderState.Error);
-      consoleLog('Data not loaded from csv file',
+      consoleLog('Data not loaded from csv file _isDataSaveToDB != true',
           typeLog: 'ERROR', scope: "SpalshPageProvider >loadData ");
       return;
     }

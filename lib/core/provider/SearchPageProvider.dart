@@ -17,37 +17,18 @@ class SearchPageProvider extends BaseProvider {
   }
 
   List<WordModel> _result = [];
-  // List<WordModel> similarResults;
+
   BaseDatabase _database;
 
   List<WordModel> get getResult => _result;
 
-  // Future<bool> initDatabase() async {
-  //   await Future.delayed(Duration(seconds: 1));
-  //   // setState(ProviderState.Busy);
-
-  //   try {
-  //     // await _database.initDB();
-  //     return true;
-  //     // setState(ProviderState.Idel);
-  //   } catch (e) {
-  //     consoleLog(e.toString(), typeLog: "Error");
-  //     setErrorMessage(e.toString());
-  //     return false;
-  //     // setState(ProviderState.Error);
-  //   }
-  // }
-
   searchWord(String word) async {
     consoleLog("Searchig the word");
     setState(ProviderState.Busy);
+    // wait untile widget rebuild
+    await Future.delayed(Duration(milliseconds: 50));
     _result = [];
-    // bool databaseLoaded = await initDatabase();
 
-    // if (!databaseLoaded) {
-    //   setState(ProviderState.Error);
-    //   return;
-    // }
     _result = await _database.getWordByString(word);
     setState(ProviderState.Idel);
   }
