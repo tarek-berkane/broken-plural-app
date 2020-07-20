@@ -5,7 +5,7 @@ class LearnPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('lean Page'),
+        title: Text('learn Page'),
       ),
     );
   }

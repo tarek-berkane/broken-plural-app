@@ -1,3 +1,4 @@
+import 'package:broken_plural_ar/core/common/loggin.dart';
 import 'package:broken_plural_ar/core/enum/ProviderState.dart';
 import 'package:broken_plural_ar/core/provider/HomePageProvider.dart';
 import 'package:flutter/material.dart';
@@ -10,12 +11,14 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("homePage"),
+        // if you changed the page title don't forget to change it in testing
+        title: Text("Home Page"),
       ),
       body: ChangeNotifierProvider<HomePageProvider>(
         create: (context) => HomePageProvider(),
         builder: (context, child) => Consumer<HomePageProvider>(
           builder: (context, value, child) {
+            consoleLog(value.getState.toString());
             if (value.getState == ProviderState.Busy) {
               return Center(
                 child: CircularProgressIndicator(),

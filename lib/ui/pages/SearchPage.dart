@@ -16,6 +16,7 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // if you changed the page title don't forget to change it in testing
         title: Text('Search Word'),
       ),
       body: ChangeNotifierProvider<SearchPageProvider>(
