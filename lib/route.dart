@@ -1,6 +1,7 @@
 import 'package:broken_plural_ar/ui/pages/AboutPage.dart';
 import 'package:broken_plural_ar/ui/pages/SplashPage.dart';
 import 'package:broken_plural_ar/ui/pages/TestPage.dart';
+import 'package:broken_plural_ar/ui/pages/WordDetailPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -26,6 +27,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => SplashPage());
     case routes.AboutPage:
       return MaterialPageRoute(builder: (context) => AboutPage());
+
+    case routes.WordDetailPage:
+      var wordModel = settings.arguments;
+      return MaterialPageRoute(builder: (context) => WordDetailPage(wordModel));
 
     // TODO ADD argments
     // case routes.HomePage:

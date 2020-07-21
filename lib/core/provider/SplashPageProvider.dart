@@ -32,7 +32,6 @@ class SpalshPageProvider extends BaseProvider {
 
   Future loadData() async {
     // TODO: need to find a way to overpass excption of calling setstate during builde
-    consoleLog('test 1 check', scope: "loadData", typeLog: 'debug');
 
     dynamic _csvData = await _loadDataFromCsv();
 

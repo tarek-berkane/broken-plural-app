@@ -15,6 +15,7 @@ class SplashPage extends StatelessWidget {
               value.loadData();
               return child;
             }
+
             return Center(
               child: Text("Some error happen"),
             );

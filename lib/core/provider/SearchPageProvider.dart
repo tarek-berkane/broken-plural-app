@@ -6,6 +6,8 @@ import 'package:broken_plural_ar/core/provider/BaseProvider.dart';
 import 'package:broken_plural_ar/core/services/database/BaseDatabase.dart';
 import 'package:broken_plural_ar/core/services/database/FakeDatabase.dart';
 import 'package:broken_plural_ar/core/services/database/RealDatabase.dart';
+import 'package:broken_plural_ar/core/services/routing/navigation_service.dart';
+import 'package:broken_plural_ar/locator.dart';
 
 class SearchPageProvider extends BaseProvider {
   SearchPageProvider() {
@@ -31,5 +33,10 @@ class SearchPageProvider extends BaseProvider {
 
     _result = await _database.getWordByString(word);
     setState(ProviderState.Idel);
+  }
+
+  void navigateTo(String pageName, {argument}) {
+    final NavigationService _navigationService = locator<NavigationService>();
+    _navigationService.navigateTo(pageName, argument: argument);
   }
 }

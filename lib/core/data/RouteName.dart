@@ -5,3 +5,4 @@ const String AboutPage = 'about';
 const String LearnPage = 'learn';
 const String TestPage = 'test';
 const String SearchPage = 'search';
+const String WordDetailPage = 'wordDetail';

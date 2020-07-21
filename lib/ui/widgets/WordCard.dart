@@ -1,6 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:broken_plural_ar/core/models/WordModel.dart';
+import 'package:broken_plural_ar/core/provider/SearchPageProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:broken_plural_ar/core/data/RouteName.dart' as routes;
 
 class WordCard extends StatelessWidget {
   const WordCard({@required this.wordModel});
@@ -8,10 +12,12 @@ class WordCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _provider = Provider.of<SearchPageProvider>(context);
+
     return Card(
       child: InkWell(
         onTap: () {
-          // TODO: navigate to about word page
+          _provider.navigateTo(routes.WordDetailPage, argument: wordModel);
         },
         child: Container(
           child: Column(
