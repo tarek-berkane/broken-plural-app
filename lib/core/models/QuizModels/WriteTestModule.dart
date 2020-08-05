@@ -1,6 +1,6 @@
-import 'package:broken_plural_ar/core/models/TestModels/AbstractTestModel.dart';
+import 'package:broken_plural_ar/core/models/QuizModels/AbstractTestModel.dart';
 
-class ChoiceTestModel extends TestModel {
+class WriteTestModel extends QuizModel {
   @override
   bool attemptValidation() {
     // TODO: implement attemptValidation

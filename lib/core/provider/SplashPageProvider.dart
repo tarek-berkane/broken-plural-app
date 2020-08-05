@@ -1,4 +1,4 @@
-import 'package:broken_plural_ar/core/common/loggin.dart';
+// import 'package:broken_plural_ar/core/common/loggin.dart';
 
 import 'package:broken_plural_ar/core/enum/ProviderState.dart';
 import 'package:broken_plural_ar/core/provider/BaseProvider.dart';
@@ -8,8 +8,11 @@ import 'package:broken_plural_ar/core/utils/CsvToDatabase.dart';
 import 'package:broken_plural_ar/locator.dart';
 
 import 'package:broken_plural_ar/core/data/RouteName.dart' as route;
+import 'package:logging/logging.dart';
 
 class SpalshPageProvider extends BaseProvider {
+  static var _log = Logger('SpalshPageProvider');
+
   Future<dynamic> _loadDataFromCsv() async {
     CsvLoadManager _csvLoadManager = CsvLoadManager();
     if (await _csvLoadManager.loadCSV()) {
@@ -24,8 +27,9 @@ class SpalshPageProvider extends BaseProvider {
       await csvToDatabase.pushToDatabase(csvData);
       return true;
     } catch (e) {
-      consoleLog(e.toString(),
-          typeLog: "Error", scope: "SpalshPageProvider > _saveDataToDataBase");
+      // consoleLog(e.toString(),
+      //     typeLog: "Error", scope: "SpalshPageProvider > _saveDataToDataBase");
+      _log.shout(e.toString());
       return false;
     }
   }
@@ -37,16 +41,19 @@ class SpalshPageProvider extends BaseProvider {
 
     if (_csvData == null) {
       setState(ProviderState.Error);
-      consoleLog('Data not loaded from csv file _csvData == null',
-          typeLog: 'ERROR', scope: "loadData > _loadDataFromCsv");
+      _log.shout('Data not loaded from csv file _csvData == null');
+      // consoleLog('Data not loaded from csv file _csvData == null',
+      //     typeLog: 'ERROR', scope: "loadData > _loadDataFromCsv");
       return;
     }
 
     bool _isDataSaveToDB = await _saveDataToDataBase(_csvData);
     if (!_isDataSaveToDB) {
       setState(ProviderState.Error);
-      consoleLog('Data not loaded from csv file _isDataSaveToDB != true',
-          typeLog: 'ERROR', scope: "SpalshPageProvider >loadData ");
+      _log.shout('Data not loaded from csv file _isDataSaveToDB != true');
+
+      // consoleLog('Data not loaded from csv file _isDataSaveToDB != true',
+      //     typeLog: 'ERROR', scope: "SpalshPageProvider >loadData ");
       return;
     }
 

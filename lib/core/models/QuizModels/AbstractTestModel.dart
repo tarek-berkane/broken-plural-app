@@ -1,4 +1,4 @@
-abstract class TestModel {
+abstract class QuizModel {
   String _question;
   String _answear;
   List<String> _choices;

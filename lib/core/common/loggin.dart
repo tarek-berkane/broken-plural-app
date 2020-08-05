@@ -1,6 +1,8 @@
 import 'package:broken_plural_ar/core/data/AppData.dart';
 import 'package:flutter/foundation.dart';
 
+import 'package:logging/logging.dart';
+
 /*
 Reset = "\x1b[0m"
 Bright = "\x1b[1m"
@@ -56,4 +58,22 @@ void consoleLog(text, {scope, String typeLog = 'DEBUG'}) {
   debugPrint(
       "$color $_typeLog \x1b[37m: $text  || scope :\x1b[33m $name \x1b[37m||\x1b[36m  ${time.hour}:" +
           "${time.minute.toString().padLeft(2, '0')}:${time.second.toString().padLeft(2, '0')}\x1b[37m");
+}
+
+void initLogging(Level minLevel) {
+  Logger.root.level = minLevel;
+  Logger.root.onRecord.listen((event) {
+    String color;
+
+    if (event.level.value < 600) {
+      color = '\x1b[32m';
+    } else if (event.level.value < 900) {
+      color = '\x1b[34m';
+    } else {
+      color = "\x1b[33m";
+    }
+
+    debugPrint(
+        "$color ${event.level.name} \x1b[37m: [${event.loggerName}] : ${event.message} || ${event.time}");
+  });
 }

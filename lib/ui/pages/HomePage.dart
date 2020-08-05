@@ -18,13 +18,6 @@ class HomePage extends StatelessWidget {
         create: (context) => HomePageProvider(),
         builder: (context, child) => Consumer<HomePageProvider>(
           builder: (context, value, child) {
-            consoleLog(value.getState.toString());
-            if (value.getState == ProviderState.Busy) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-
             return Container(
               child: Column(
                 children: [

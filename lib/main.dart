@@ -8,8 +8,12 @@ import 'package:broken_plural_ar/core/data/RouteName.dart' as routes;
 import 'package:broken_plural_ar/route.dart' as router;
 import 'package:broken_plural_ar/locator.dart';
 
+import 'package:logging/logging.dart';
+import 'package:broken_plural_ar/core/common/loggin.dart';
+
 void main() {
   setupLocator();
+  initLogging(Level.ALL);
   runApp(MyApp());
 }
 

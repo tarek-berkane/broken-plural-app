@@ -72,6 +72,7 @@ class SearchArea extends StatelessWidget {
                 height: 40,
                 width: 200,
                 child: TextField(
+                  autofocus: false,
                   controller: _controller,
                   decoration: InputDecoration(
                       contentPadding:
