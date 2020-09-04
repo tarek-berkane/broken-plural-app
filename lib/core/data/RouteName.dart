@@ -4,5 +4,6 @@ const String AboutPage = 'about';
 // content
 const String LearnPage = 'learn';
 const String TestPage = 'test';
+const String ResultPage = 'resultPage';
 const String SearchPage = 'search';
 const String WordDetailPage = 'wordDetail';

@@ -1,23 +1,4 @@
 class WordModel {
-  WordModel.fromDict(Map data) {
-    vocalized = data['vocalized'];
-    unvocalized = data['unvocalized'];
-    wordtype = data['wordtype'];
-    root = data['root'];
-    wazn = data['wazn'];
-    category = data['category'];
-    gender = data['gender'];
-    feminin = data['feminin'];
-    masculin = data['masculin'];
-    brokenPlural = data['brokenPlural'];
-    feminable = data['feminable'];
-    masculinPlural = data['masculinPlural'];
-    femininPlural = data['femininPlural'];
-    mamnou3Sarf = data['mamnou3Sarf'];
-    relative = data['relative'];
-    pluralTanwinNasb = data['pluralTanwinNasb'];
-  }
-
   String vocalized;
   String unvocalized;
   String wordtype;
@@ -29,6 +10,7 @@ class WordModel {
   String masculin;
   String brokenPlural;
 
+  int id;
   int feminable;
   int masculinPlural;
   int femininPlural;
@@ -58,5 +40,54 @@ class WordModel {
     data['pluralTanwinNasb'] = pluralTanwinNasb;
 
     return data;
+  }
+
+  @override
+  String toString() {
+    return '''
+    id            ${id ?? "not defined"}
+    vocalized :   $vocalized
+    unvocalized : $unvocalized
+    root :        $root
+    ''';
+  }
+
+  // constructure
+  WordModel.fromDict(Map data) {
+    vocalized = data['vocalized'];
+    unvocalized = data['unvocalized'];
+    wordtype = data['wordtype'];
+    root = data['root'];
+    wazn = data['wazn'];
+    category = data['category'];
+    gender = data['gender'];
+    feminin = data['feminin'];
+    masculin = data['masculin'];
+    brokenPlural = data['brokenPlural'];
+    feminable = data['feminable'];
+    masculinPlural = data['masculinPlural'];
+    femininPlural = data['femininPlural'];
+    mamnou3Sarf = data['mamnou3Sarf'];
+    relative = data['relative'];
+    pluralTanwinNasb = data['pluralTanwinNasb'];
+  }
+
+  WordModel.fromList(List data) {
+    vocalized = data[1];
+    unvocalized = data[2];
+    wordtype = data[3];
+    root = data[4];
+    wazn = data[5];
+    category = data[6];
+    gender = data[7];
+    feminin = data[8];
+    masculin = data[9];
+    brokenPlural = data[10];
+    feminable = data[11];
+    masculinPlural = data[12];
+    femininPlural = data[13];
+    mamnou3Sarf = data[14];
+    relative = data[15];
+    pluralTanwinNasb = data[16];
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:broken_plural_ar/core/common/loggin.dart';
 import 'package:broken_plural_ar/core/services/database/BaseDatabase.dart';
 import 'package:broken_plural_ar/core/models/WordModel.dart';
@@ -81,5 +83,23 @@ class FakeDatabase extends BaseDatabase {
       });
     }
     return Future.value(true);
+  }
+
+  // Load Random Word from DataBase
+  // retrun  List<Model> with size from [length]
+  Future<List<WordModel>> getRandomWord(int length) async {
+    assert(length < fakeDatabaseStorage.length);
+    final _random = Random();
+    var wordModelList = <WordModel>[];
+    var dataBaseLength = fakeDatabaseStorage.length;
+
+    for (var i = 0; i < length; i++) {
+      var dataBaseItem =
+          fakeDatabaseStorage[_random.nextInt(dataBaseLength)];
+      var wordMode = WordModel.fromDict(dataBaseItem);
+      wordModelList.add(wordMode);
+    }
+    await Future.delayed(Duration(milliseconds: 300));
+    return wordModelList;
   }
 }

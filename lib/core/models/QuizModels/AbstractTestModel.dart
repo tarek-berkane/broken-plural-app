@@ -8,7 +8,7 @@ abstract class QuizModel {
   String get getQuestion => _question;
   List<String> get getChoices => _choices;
 
-  set setAttempt(String atmpt) => _attempt = atmpt;
+  set setAttempt(String attempt) => _attempt = attempt;
 
   bool attemptValidation();
 

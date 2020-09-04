@@ -1,4 +1,5 @@
 import 'package:broken_plural_ar/ui/pages/AboutPage.dart';
+import 'package:broken_plural_ar/ui/pages/ResultPage.dart';
 import 'package:broken_plural_ar/ui/pages/SplashPage.dart';
 import 'package:broken_plural_ar/ui/pages/TestPage.dart';
 import 'package:broken_plural_ar/ui/pages/WordDetailPage.dart';
@@ -22,15 +23,20 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => SearchPage());
     case routes.TestPage:
       return MaterialPageRoute(builder: (context) => TestPage());
-
     case routes.SplashPage:
       return MaterialPageRoute(builder: (context) => SplashPage());
     case routes.AboutPage:
       return MaterialPageRoute(builder: (context) => AboutPage());
 
+    case routes.ResultPage:
+      var quizeResult = settings.arguments;
+      return MaterialPageRoute(
+          builder: (context) => ResultPage(quizResult: quizeResult));
+
     case routes.WordDetailPage:
       var wordModel = settings.arguments;
-      return MaterialPageRoute(builder: (context) => WordDetailPage(wordModel));
+      return MaterialPageRoute(
+          builder: (context) => WordDetailPage(wordModel));
 
     // TODO ADD argments
     // case routes.HomePage:

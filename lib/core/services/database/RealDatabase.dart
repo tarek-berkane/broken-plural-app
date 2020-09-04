@@ -40,4 +40,9 @@ class RealDatabase extends BaseDatabase {
     // TODO: implement newClient
     throw UnimplementedError();
   }
+
+  Future<List<WordModel>> getRandomWord(int length) async {
+    // TODO: implement getRandomWord
+    throw UnimplementedError();
+  }
 }

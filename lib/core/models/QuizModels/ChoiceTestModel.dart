@@ -1,3 +1,4 @@
+import 'package:broken_plural_ar/core/controller/quiz_manager.dart';
 import 'package:broken_plural_ar/core/models/QuizModels/AbstractTestModel.dart';
 
 class ChoiceTestModel extends QuizModel {
