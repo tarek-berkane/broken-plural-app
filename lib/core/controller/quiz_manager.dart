@@ -23,7 +23,7 @@ class QuizManager {
       var line = stdin.readLineSync(encoding: Encoding.getByName('utf-8'));
       quizList[i].setReponse = line;
 
-      noteList[i] = (quizList[i].isCorrect) ? 1 : 0;
+      // noteList[i] = (quizList[i].isCorrect) ? 1 : 0;
       print(noteList[i]);
     }
     // show result

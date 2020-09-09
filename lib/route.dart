@@ -22,7 +22,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case routes.SearchPage:
       return MaterialPageRoute(builder: (context) => SearchPage());
     case routes.TestPage:
-      return MaterialPageRoute(builder: (context) => TestPage());
+      return MaterialPageRoute(builder: (context) => OptionsPage());
     case routes.SplashPage:
       return MaterialPageRoute(builder: (context) => SplashPage());
     case routes.AboutPage:
