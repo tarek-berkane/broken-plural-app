@@ -1,5 +1,6 @@
 import 'package:broken_plural_ar/core/controller/quiz.dart';
 import 'package:broken_plural_ar/core/provider/TestPageProvider.dart';
+import 'package:broken_plural_ar/ui/widgets/counter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -75,7 +76,7 @@ class _BooleanQuizState extends State<BooleanQuiz> {
     }
 
     if (state == TestProviderState.Testing) {
-      _provider.runQuiz();
+      _provider.getQuiz();
       return QuizPage();
     }
 
@@ -107,6 +108,29 @@ class _BooleanQuizState extends State<BooleanQuiz> {
   }
 }
 
+class ResultPageA extends StatelessWidget {
+  const ResultPageA({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final _provider = Provider.of<TestPageProvider>(context);
+
+    return Container(
+      child: Column(
+        children: [
+          Text(_provider.showResult()),
+          RaisedButton(
+            child: Text("Done"),
+            onPressed: () {
+              _provider.navigateBack();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class QuizPage extends StatefulWidget {
   const QuizPage({Key key}) : super(key: key);
 
@@ -130,11 +154,15 @@ class _QuizPageState extends State<QuizPage> {
         children: [
           Text(_provider.getQuestion),
           for (var i in _provider.getOptions) answerButton(i, _provider),
+          if (!answared)
+            Counter(onDone: () {
+              onCounterDone(_provider);
+            }),
           if (answared)
             RaisedButton(
                 child: Text('next one'),
                 onPressed: () {
-                  _provider.runQuiz();
+                  _provider.getQuiz();
                   setState(() {
                     answared = false;
                   });
@@ -144,12 +172,14 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 
-  RaisedButton answerButton(String answer, TestPageProvider provider) {
+  Widget answerButton(String answer, TestPageProvider provider) {
     Color color;
+
     if (answared) {
       color = correctAnswer == answer ? Colors.green : Colors.red;
     }
-    return RaisedButton(
+
+    var button = RaisedButton(
       child: Text(answer),
       color: color,
       onPressed: () {
@@ -160,18 +190,21 @@ class _QuizPageState extends State<QuizPage> {
         });
       },
     );
+
+    if (answared) {
+      return AbsorbPointer(
+        child: button,
+      );
+    }
+
+    return button;
   }
-}
 
-class ResultPageA extends StatelessWidget {
-  const ResultPageA({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final _provider = Provider.of<TestPageProvider>(context);
-
-    return Container(
-      child: Text(_provider.showResult()),
-    );
+  void onCounterDone(TestPageProvider provider) {
+    provider.setResponse('none');
+    setState(() {
+      answared = true;
+      correctAnswer = provider.getAnswer;
+    });
   }
 }

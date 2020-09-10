@@ -18,9 +18,8 @@ class TestPageProvider extends ChangeNotifier {
   BaseDatabase _database;
 
   Iterator _quizItrator;
-  Iterator _noteItrator;
 
-  // final _navigationService = locator<NavigationService>();
+  final _navigationService = locator<NavigationService>();
 
   var quizList = List<Quiz>(3);
   var noteList = List<bool>();
@@ -51,10 +50,8 @@ class TestPageProvider extends ChangeNotifier {
     setState(TestProviderState.Testing);
   }
 
-  void runQuiz() async {
+  void getQuiz() async {
     if (_quizItrator.moveNext()) {
-      // _noteItrator.moveNext();
-      // currentNote = _noteItrator.current;
       currentQuiz = _quizItrator.current;
       return;
     }
@@ -67,14 +64,6 @@ class TestPageProvider extends ChangeNotifier {
     List wordModelList = await _database.getRandomWord(3);
     for (var i = 0; i < 3; i++) {
       quizList[i] = Quiz(wordModelList[i]);
-    }
-  }
-
-  // make question itarable
-  // TODO: remove this function not needed
-  Iterable getQuestionItrator() sync* {
-    for (var quiz in quizList) {
-      yield quiz;
     }
   }
 
@@ -102,17 +91,22 @@ class TestPageProvider extends ChangeNotifier {
 
   // Quiz Controler
 
-  get getQuestion => currentQuiz.question;
-
   setResponse(String text) {
     currentQuiz.setReponse = text;
     noteList.add(currentQuiz.isCorrect());
     print(currentNote);
   }
 
+  get getQuestion => currentQuiz.question;
+
   get getResult => currentQuiz.isCorrect();
 
   get getAnswer => currentQuiz.getAnswer;
 
   get getOptions => currentQuiz.getOptions;
+
+// Navigation
+  Future navigateBack() async {
+    await _navigationService.goBack();
+  }
 }

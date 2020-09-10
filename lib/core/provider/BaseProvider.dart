@@ -16,6 +16,6 @@ class BaseProvider extends ChangeNotifier {
 
   void setErrorMessage(String message) {
     _errorMessage = message;
-    notifyListeners();
+    // notifyListeners();
   }
 }
